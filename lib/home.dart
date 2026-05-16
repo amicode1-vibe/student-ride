@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studentride/setting.dart';
+import 'package:studentride/driverdetails.dart';
 
 class MainNavigation extends StatefulWidget {
   final String role;
@@ -24,10 +25,10 @@ class _MainNavigationState extends State<MainNavigation> {
       HomeTab(role: widget.role),
 
       /// RIDES TAB
-      const RideTab(),
+      const Scaffold(body: Center(child: Text("Rides Screen"))),
 
       /// SETTINGS TAB
-      const SettingsScreen(role: "Driver"),
+      SettingsScreen(role: widget.role),
     ];
   }
 
@@ -74,62 +75,305 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("$role Home"), centerTitle: true),
+    bool isDriver = role == "driver";
+    if (isDriver) {
+      if (isDriver) {
+        return Scaffold(
+          backgroundColor: const Color(0xfff5f7fb),
 
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                /// TOP BLUE HEADER
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(25),
 
-          children: [
-            Icon(
-              role == "Driver" ? Icons.drive_eta : Icons.school,
-              size: 100,
-              color: Colors.blue,
+                  decoration: const BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(35),
+                      bottomRight: Radius.circular(35),
+                    ),
+                  ),
+
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 40),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: const [
+                          Icon(Icons.menu, color: Colors.white, size: 32),
+
+                          CircleAvatar(
+                            radius: 24,
+                            backgroundColor: Colors.white,
+                            child: Icon(Icons.person, color: Colors.blue),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 35),
+
+                      const Text(
+                        "Welcome Driver",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      const Text(
+                        "You have 3 new ride requests",
+                        style: TextStyle(color: Colors.white70, fontSize: 18),
+                      ),
+
+                      const SizedBox(height: 30),
+
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 25,
+                          horizontal: 20,
+                        ),
+
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Column(
+                              children: const [
+                                Icon(
+                                  Icons.people,
+                                  color: Colors.blue,
+                                  size: 35,
+                                ),
+
+                                SizedBox(height: 10),
+
+                                Text(
+                                  "12",
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+
+                                Text(
+                                  "Passengers",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            Container(height: 80, width: 1, color: Colors.grey),
+
+                            Column(
+                              children: const [
+                                Icon(
+                                  Icons.attach_money,
+                                  color: Colors.green,
+                                  size: 40,
+                                ),
+
+                                SizedBox(height: 10),
+
+                                Text(
+                                  "₹850",
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+
+                                Text(
+                                  "Today's Earning",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 25),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        "Ride Requests",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+
+                      Text(
+                        "View All",
+                        style: TextStyle(
+                          color: Colors.deepPurple,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 15),
+
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 5,
+
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+
+                      padding: const EdgeInsets.all(18),
+
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            blurRadius: 10,
+                            offset: const Offset(0, 5),
+                          ),
+                        ],
+                      ),
+
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 30,
+                            backgroundColor: Colors.orange.shade100,
+
+                            child: const Icon(
+                              Icons.school,
+                              color: Colors.orange,
+                              size: 32,
+                            ),
+                          ),
+
+                          const SizedBox(width: 15),
+
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+
+                              children: [
+                                Text(
+                                  "Student ${index + 1}",
+                                  style: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+
+                                const SizedBox(height: 5),
+
+                                const Text(
+                                  "Pickup: College Gate",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 22,
+                                vertical: 12,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
+
+                            onPressed: () {},
+
+                            child: const Text(
+                              "Accept",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+
+                const SizedBox(height: 100),
+              ],
             ),
+          ),
+        );
+      }
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Student Home"),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+      ),
 
-            const SizedBox(height: 20),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(15),
+        itemCount: 5,
 
-            Text(
-              "Welcome $role",
-              style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+        itemBuilder: (context, index) {
+          return Card(
+            child: ListTile(
+              leading: const CircleAvatar(child: Icon(Icons.directions_car)),
+
+              title: Text("Driver ${index + 1}"),
+
+              subtitle: const Text("Arriving in 10 mins"),
+
+              trailing: ElevatedButton(
+                onPressed: () {},
+
+                child: const Text("Book"),
+              ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-/// RIDES TAB
-
-class RideTab extends StatelessWidget {
-  const RideTab({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Rides"), centerTitle: true),
-
-      body: const Center(
-        child: Text("Available Rides", style: TextStyle(fontSize: 24)),
-      ),
-    );
-  }
-}
-
-/// SETTINGS TAB
-
-class SettingsTab extends StatelessWidget {
-  const SettingsTab({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Settings"), centerTitle: true),
-
-      body: const Center(
-        child: Text("Settings Screen", style: TextStyle(fontSize: 24)),
+          );
+        },
       ),
     );
   }
