@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:studentride/signup.dart';
-import 'package:studentride/home.dart';
 
 class LoginScreen extends StatelessWidget {
   final String role;

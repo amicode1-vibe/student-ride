@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studentride/setting.dart';
 
 class MainNavigation extends StatefulWidget {
   final String role;
@@ -26,7 +27,7 @@ class _MainNavigationState extends State<MainNavigation> {
       const RideTab(),
 
       /// SETTINGS TAB
-      const SettingsTab(),
+      const SettingsScreen(role: "Driver"),
     ];
   }
 
@@ -37,7 +38,7 @@ class _MainNavigationState extends State<MainNavigation> {
 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
-
+        selectedFontSize: 12,
         onTap: (index) {
           setState(() {
             currentIndex = index;
