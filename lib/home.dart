@@ -263,7 +263,7 @@ class HomeTab extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.1),
+                            color: Colors.grey.withAlpha(26),
                             blurRadius: 10,
                             offset: const Offset(0, 5),
                           ),
@@ -347,33 +347,278 @@ class HomeTab extends StatelessWidget {
       }
     }
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Student Home"),
-        centerTitle: true,
-        backgroundColor: Colors.blue,
-      ),
+      backgroundColor: const Color(0xfff5f7fb),
 
-      body: ListView.builder(
-        padding: const EdgeInsets.all(15),
-        itemCount: 5,
+      body: SafeArea(
+        child: Column(
+          children: [
+            /// TOP BLUE HEADER
+            Container(
+              padding: const EdgeInsets.all(25),
 
-        itemBuilder: (context, index) {
-          return Card(
-            child: ListTile(
-              leading: const CircleAvatar(child: Icon(Icons.directions_car)),
+              decoration: const BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(35),
+                  bottomRight: Radius.circular(35),
+                ),
+              ),
 
-              title: Text("Driver ${index + 1}"),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Icon(Icons.arrow_back, color: Colors.white, size: 30),
 
-              subtitle: const Text("Arriving in 10 mins"),
+                      CircleAvatar(
+                        radius: 24,
+                        backgroundColor: Colors.white,
+                        child: Icon(Icons.person, color: Colors.blue),
+                      ),
+                    ],
+                  ),
 
-              trailing: ElevatedButton(
-                onPressed: () {},
+                  const SizedBox(height: 35),
 
-                child: const Text("Book"),
+                  const Text(
+                    "Welcome student",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  const SizedBox(height: 25),
+
+                  const Text(
+                    "Drivers Nearby",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  const Text(
+                    "Find nearby drivers quickly",
+                    style: TextStyle(color: Colors.white70, fontSize: 18),
+                  ),
+
+                  const SizedBox(height: 25),
+
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 25,
+                      horizontal: 20,
+                    ),
+
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          children: const [
+                            Icon(Icons.people, color: Colors.blue, size: 35),
+
+                            SizedBox(height: 10),
+
+                            Text(
+                              "12",
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+
+                            Text(
+                              "Drivers",
+                              style: TextStyle(
+                                color: Colors.black54,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Container(height: 80, width: 1, color: Colors.grey),
+
+                        Column(
+                          children: const [
+                            Icon(
+                              Icons.access_time,
+                              color: Colors.green,
+                              size: 35,
+                            ),
+
+                            SizedBox(height: 10),
+
+                            Text(
+                              "15 min",
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+
+                            Text(
+                              "Arrival",
+                              style: TextStyle(
+                                color: Colors.black54,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-          );
-        },
+
+            const SizedBox(height: 20),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text(
+                    "Available Drivers",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+
+                  Text(
+                    "View All",
+                    style: TextStyle(
+                      color: Colors.deepPurple,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            Expanded(
+              child: ListView.builder(
+                itemCount: 5,
+
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DriverDetailsScreen(
+                            driverName: "Driver ${index + 1}",
+                          ),
+                        ),
+                      );
+                    },
+
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+
+                      padding: const EdgeInsets.all(18),
+
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withAlpha(26),
+                            blurRadius: 10,
+                            offset: const Offset(0, 5),
+                          ),
+                        ],
+                      ),
+
+                      child: Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 30,
+                            backgroundColor: Colors.blue.shade100,
+
+                            child: const Icon(
+                              Icons.directions_car,
+                              color: Colors.blue,
+                              size: 30,
+                            ),
+                          ),
+
+                          const SizedBox(width: 15),
+
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+
+                              children: [
+                                Text(
+                                  "Driver ${index + 1}",
+                                  style: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+
+                                const SizedBox(height: 5),
+
+                                const Text(
+                                  "Arriving in 10 mins",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 18,
+                              vertical: 10,
+                            ),
+
+                            decoration: BoxDecoration(
+                              color: Colors.orange.shade100,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+
+                            child: const Text(
+                              "Nearby",
+                              style: TextStyle(
+                                color: Colors.orange,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
