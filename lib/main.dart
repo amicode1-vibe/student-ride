@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studentride/login.dart';
+import 'package:studentride/splashscreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,7 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: HomePage());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const SplashScreen(),
+    );
   }
 }
 
@@ -23,10 +27,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: const Text(
-          "Student Ride App",
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text("Tripzo", style: TextStyle(color: Colors.white)),
         centerTitle: true,
       ),
       body: Padding(
@@ -36,7 +37,7 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "Welcome to Student Ride",
+                "Welcome to Tripzo",
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -60,7 +61,7 @@ class HomePage extends StatelessWidget {
                     //   const SnackBar(content: Text('Login as Driver')),
                     // );
 
-                     Navigator.push(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => LoginScreen(role: "driver"),
