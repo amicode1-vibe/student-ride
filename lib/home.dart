@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:studentride/setting.dart';
 import 'package:studentride/driverdetails.dart';
+import 'package:studentride/ridedetails.dart';
+import 'package:studentride/profile.dart';
 
 class MainNavigation extends StatefulWidget {
   final String role;
@@ -25,10 +27,104 @@ class _MainNavigationState extends State<MainNavigation> {
       HomeTab(role: widget.role),
 
       /// RIDES TAB
-      const Scaffold(body: Center(child: Text("Rides Screen"))),
+      Scaffold(
+        appBar: AppBar(
+          title: const Text("My Rides"),
+          backgroundColor: Colors.blue,
+        ),
+
+        body: ListView(
+          padding: const EdgeInsets.all(15),
+
+          children: [
+            Container(
+              margin: const EdgeInsets.only(bottom: 15),
+              padding: const EdgeInsets.all(15),
+
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
+              ),
+
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "College Gate → Gopeshwar",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  const Row(
+                    children: [
+                      Icon(Icons.access_time, color: Colors.blue),
+                      SizedBox(width: 5),
+                      Text("10 min away"),
+                    ],
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  const Row(
+                    children: [
+                      Icon(Icons.currency_rupee, color: Colors.green),
+                      SizedBox(width: 5),
+                      Text("₹120"),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+
+                  const Row(
+                    children: [
+                      Icon(Icons.person, color: Colors.orange),
+                      SizedBox(width: 5),
+                      Text("Rahul Rawat"),
+                    ],
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  const Row(
+                    children: [
+                      Icon(Icons.directions_car, color: Colors.purple),
+                      SizedBox(width: 5),
+                      Text("Swift Dzire"),
+                    ],
+                  ),
+                  const SizedBox(height: 15),
+
+                  ElevatedButton(
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Ride Completed Successfully"),
+                        ),
+                      );
+                    },
+
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      minimumSize: const Size(double.infinity, 50),
+                    ),
+
+                    child: const Text(
+                      "Completed",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
 
       /// SETTINGS TAB
-      SettingsScreen(role: widget.role),
+     widget.role == "driver"
+    ? const ProfileScreen()
+    : SettingsScreen(role: widget.role),
     ];
   }
 
@@ -323,7 +419,15 @@ class HomeTab extends StatelessWidget {
                               ),
                             ),
 
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const RideDetailsScreen(),
+                                ),
+                              );
+                            },
 
                             child: const Text(
                               "Accept",
