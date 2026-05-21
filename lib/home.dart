@@ -122,9 +122,9 @@ class _MainNavigationState extends State<MainNavigation> {
       ),
 
       /// SETTINGS TAB
-     widget.role == "driver"
-    ? const ProfileScreen()
-    : SettingsScreen(role: widget.role),
+      widget.role == "driver"
+          ? const ProfileScreen()
+          : SettingsScreen(role: widget.role),
     ];
   }
 
@@ -628,6 +628,7 @@ class HomeTab extends StatelessWidget {
                         MaterialPageRoute(
                           builder: (context) => DriverDetailsScreen(
                             driverName: "Driver ${index + 1}",
+                            driverPhone: "9876543210",
                           ),
                         ),
                       );

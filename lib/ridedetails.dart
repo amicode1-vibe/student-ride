@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RideDetailsScreen extends StatelessWidget {
   const RideDetailsScreen({super.key});
@@ -22,54 +23,78 @@ class RideDetailsScreen extends StatelessWidget {
 
         child: Column(
           children: [
+            /// MAP UI
             Container(
-              padding: const EdgeInsets.all(20),
+              height: 220,
+              width: double.infinity,
 
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 3, 3, 3),
+                color: Colors.blue.shade100,
                 borderRadius: BorderRadius.circular(20),
 
-                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
+                image: const DecorationImage(
+                  image: AssetImage("assets/images/map_placeholder.png"),
+                  fit: BoxFit.cover,
+                ),
               ),
-
-              child: Column(
+              child: Stack(
                 children: [
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundColor: Colors.blue.shade100,
-                    child: const Icon(
-                      Icons.person,
-                      size: 40,
-                      color: Colors.blue,
+                  /// DRIVER LOCATION
+                  Positioned(
+                    top: 40,
+                    left: 60,
+
+                    child: CircleAvatar(
+                      radius: 22,
+                      backgroundColor: Colors.blue,
+
+                      child: const Icon(Icons.local_taxi, color: Colors.white),
                     ),
                   ),
 
-                  const SizedBox(height: 15),
+                  /// STUDENT LOCATION
+                  Positioned(
+                    bottom: 40,
+                    right: 70,
 
-                  const Text(
-                    "Amit Rawat",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    child: CircleAvatar(
+                      radius: 22,
+                      backgroundColor: Colors.red,
+
+                      child: const Icon(Icons.location_on, color: Colors.white),
+                    ),
                   ),
 
-                  const SizedBox(height: 30),
+                  /// ETA BOX
+                  Positioned(
+                    top: 15,
+                    right: 15,
 
-                  rideInfo(
-                    Icons.location_on,
-                    "Pickup",
-                    "College Gate",
-                    Colors.green,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 8,
+                      ),
+
+                      decoration: BoxDecoration(
+                        color: Colors.black87,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+
+                      child: const Text(
+                        "10 min away",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
-
-                  const SizedBox(height: 20),
-
-                  rideInfo(Icons.flag, "Drop", "Chamoli Market", Colors.red),
-
-                  const SizedBox(height: 20),
-
-                  rideInfo(Icons.currency_rupee, "Fare", "₹120", Colors.orange),
                 ],
               ),
             ),
+
+            const SizedBox(height: 20),
 
             const SizedBox(height: 30),
 
@@ -77,8 +102,6 @@ class RideDetailsScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton.icon(
-                    onPressed: () {},
-
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                       padding: const EdgeInsets.symmetric(vertical: 15),
@@ -87,7 +110,14 @@ class RideDetailsScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                       ),
                     ),
+                    onPressed: () async {
+                      final Uri phoneUri = Uri(
+                        scheme: 'tel',
+                        path: '9876543210',
+                      );
 
+                      await launchUrl(phoneUri);
+                    },
                     icon: const Icon(Icons.call, color: Colors.white),
 
                     label: const Text(
@@ -101,7 +131,9 @@ class RideDetailsScreen extends StatelessWidget {
 
                 Expanded(
                   child: ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
 
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,

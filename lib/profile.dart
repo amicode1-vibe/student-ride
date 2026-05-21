@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:studentride/editprofile.dart';
+import 'package:studentride/login.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -137,42 +139,45 @@ class ProfileScreen extends StatelessWidget {
 
               child: Column(
                 children: [
-                  ElevatedButton.icon(
-                    onPressed: () {},
-
-                    icon: const Icon(Icons.edit),
-
-                    label: const Text("Edit Profile"),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const EditProfileScreen(),
+                        ),
+                      );
+                    },
 
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       foregroundColor: Colors.white,
                       minimumSize: const Size(double.infinity, 55),
-
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
                     ),
+
+                    child: const Text("Edit Profile"),
                   ),
 
                   const SizedBox(height: 15),
 
-                  ElevatedButton.icon(
-                    onPressed: () {},
-
-                    icon: const Icon(Icons.logout),
-
-                    label: const Text("Logout"),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const LoginScreen(role: "driver"),
+                        ),
+                      );
+                    },
 
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                       foregroundColor: Colors.white,
                       minimumSize: const Size(double.infinity, 55),
-
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
                     ),
+
+                    child: const Text("Logout"),
                   ),
                 ],
               ),

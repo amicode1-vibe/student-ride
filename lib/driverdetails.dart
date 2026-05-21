@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:studentride/bookingdetails.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DriverDetailsScreen extends StatelessWidget {
   final String driverName;
+  final String driverPhone;
 
-  const DriverDetailsScreen({super.key, required this.driverName});
+  const DriverDetailsScreen({
+    super.key,
+    required this.driverName,
+    required this.driverPhone,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +134,13 @@ class DriverDetailsScreen extends StatelessWidget {
                       /// CALL BUTTON
                       Expanded(
                         child: ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            final Uri phoneUri = Uri(
+                              scheme: 'tel',
+                              path: driverPhone,
+                            );
+                            launchUrl(phoneUri);
+                          },
 
                           icon: const Icon(Icons.call),
 
@@ -153,29 +166,14 @@ class DriverDetailsScreen extends StatelessWidget {
                       Expanded(
                         child: ElevatedButton.icon(
                           onPressed: () {
-                            showDialog(
-                              context: context,
-
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: const Text("Ride Booked"),
-
-                                  content: Text("Ride booked with $driverName"),
-
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-
-                                      child: const Text("OK"),
-                                    ),
-                                  ],
-                                );
-                              },
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const BookingDetailsScreen(),
+                              ),
                             );
                           },
-
                           icon: const Icon(Icons.check),
 
                           label: const Text("Book Ride"),
