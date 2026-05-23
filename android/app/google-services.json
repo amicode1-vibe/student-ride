@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "200080333384",
+    "project_id": "tripzo-a6939",
+    "storage_bucket": "tripzo-a6939.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200080333384:android:27a6d2917234190b05967d",
+        "android_client_info": {
+          "package_name": "com.example.studentride"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDP-kppArFz59dVCVATHTBihi4cujHJPjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
